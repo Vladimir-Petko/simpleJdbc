@@ -1,19 +1,30 @@
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Application {
     private static final String TABLE = "tasks";
 
     public static void main(String[] args) {
 
-        DatabaseConnector databaseConnector = new DatabaseConnector();
+        DataBaseConnector databaseConnector = new DataBaseConnector();
         Connection connection = databaseConnector.getNewConnection();
+        DataBaseService dataBaseService = new DataBaseService();
+
         if (connection != null) {
             System.out.println("connection ok");
-            if (!checkSchema(connection)) {
-                createSchema(connection);
+//            if (!checkSchema(connection)) {
+//                createSchema(connection);
+//            }
+ //           Task task = new Task("newTask","newDescr");
+ //           dataBaseService.add(task,TABLE, connection);
+
+            List<Task> allTasks = dataBaseService.findAll(TABLE,connection);
+            for (Task t:allTasks
+                 ) {
+                System.out.println(t);
+
             }
         } else {
             System.out.println("no connection");

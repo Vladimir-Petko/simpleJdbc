@@ -1,13 +1,12 @@
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 
-public class DatabaseConnector {
+public class DataBaseConnector {
     public Connection getNewConnection() {
         Connection connection;
-        try (InputStream in = DatabaseConnector.class.getClassLoader().getResourceAsStream("application.properties")) {
+        try (InputStream in = DataBaseConnector.class.getClassLoader().getResourceAsStream("application.properties")) {
             Properties config = new Properties();
             config.load(in);
             // Class.forName(config.getProperty("driver-class-name"));
