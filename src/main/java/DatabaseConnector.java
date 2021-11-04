@@ -16,11 +16,7 @@ public class DatabaseConnector {
                     config.getProperty("username"),
                     config.getProperty("password")
             );
-            if (connection != null){
-                System.out.println("connection ok");
-            }else{
-                System.out.println("no connection");
-            }
+
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
