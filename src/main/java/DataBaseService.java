@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,19 @@ public class DataBaseService {
 
     public List<Task> findAll(String table, Connection connection) {
         List<Task> result = new ArrayList<>();
-        //todo
+       try (PreparedStatement ps = connection.prepareStatement(table)) {
+           ResultSet res = ps.executeQuery();
+           Task task = new Task();
+           while(res.next()){
+               task.setId(res.getString("id"));
+               task.setName(res.getString("name"));
+               task.setDescription(res.getString("description"));
+               task.setDate(res.getDate("date").toLocalDate());
+               result.add(task);
+           }
+       } catch (SQLException throwables) {
+           throwables.printStackTrace();
+       }
         return result;
     }
 
