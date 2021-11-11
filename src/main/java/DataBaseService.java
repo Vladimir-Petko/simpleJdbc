@@ -28,14 +28,15 @@ public class DataBaseService {
 
     public List<Task> findAll(String table, Connection connection) {
         List<Task> result = new ArrayList<>();
-       try (PreparedStatement ps = connection.prepareStatement(table)) {
+        String asd = "SELECT * FROM " + table;
+       try (PreparedStatement ps = connection.prepareStatement(asd)) {
            ResultSet res = ps.executeQuery();
            Task task = new Task();
            while(res.next()){
-               task.setId(res.getString("id"));
-               task.setName(res.getString("name"));
-               task.setDescription(res.getString("description"));
-               task.setDate(res.getDate("date").toLocalDate());
+               task.setId(res.getString("task_id"));
+               task.setName(res.getString("task_name"));
+               task.setDescription(res.getString("task_description"));
+               task.setDate(res.getDate("create_date").toLocalDate());
                result.add(task);
            }
        } catch (SQLException throwables) {
