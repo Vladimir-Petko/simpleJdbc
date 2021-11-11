@@ -31,8 +31,9 @@ public class DataBaseService {
         String asd = "SELECT * FROM " + table;
        try (PreparedStatement ps = connection.prepareStatement(asd)) {
            ResultSet res = ps.executeQuery();
-           Task task = new Task();
+
            while(res.next()){
+               Task task = new Task();
                task.setId(res.getString("task_id"));
                task.setName(res.getString("task_name"));
                task.setDescription(res.getString("task_description"));
@@ -43,6 +44,16 @@ public class DataBaseService {
            throwables.printStackTrace();
        }
         return result;
+    }
+
+    public void delete(String id, String table, Connection connection) {
+            String DELETE = "DELETE FROM " + table + " WHERE task_id=?";
+            try(PreparedStatement ps = connection.prepareStatement(DELETE)) {
+                ps.setString(1,id);
+                ps.executeUpdate();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
     }
 
     private String generateId(Random rn) {

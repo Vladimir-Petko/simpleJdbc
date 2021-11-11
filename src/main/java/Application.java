@@ -17,8 +17,9 @@ public class Application {
 //            if (!checkSchema(connection)) {
 //                createSchema(connection);
 //            }
- //           Task task = new Task("newTask","newDescr");
- //           dataBaseService.add(task,TABLE, connection);
+//            Task task = new Task("newTask3","newDescr3");
+//            dataBaseService.add(task,TABLE, connection);
+//            dataBaseService.delete("1636642602183",TABLE,connection);
 
             List<Task> allTasks = dataBaseService.findAll(TABLE,connection);
             for (Task t:allTasks
