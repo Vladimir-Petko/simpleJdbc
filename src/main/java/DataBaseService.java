@@ -56,6 +56,19 @@ public class DataBaseService {
             }
     }
 
+    public void updateTask(String id, String table, Task task, Connection connection) {
+        String UPDATE = "UPDATE " + table + " SET task_name =?, task_description =?, create_date =? WHERE task_id =? ";
+        try(PreparedStatement ps = connection.prepareStatement(UPDATE)) {
+            ps.setString(1,task.getName());
+            ps.setString(2,task.getDescription());
+            ps.setTimestamp(3, new java.sql.Timestamp(System.currentTimeMillis()));
+            ps.setString(4,id);
+            ps.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     private String generateId(Random rn) {
         return String.valueOf(System.currentTimeMillis() + rn.nextInt(100));
     }

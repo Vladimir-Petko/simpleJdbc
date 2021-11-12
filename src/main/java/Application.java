@@ -20,6 +20,7 @@ public class Application {
 //            Task task = new Task("newTask3","newDescr3");
 //            dataBaseService.add(task,TABLE, connection);
 //            dataBaseService.delete("1636642602183",TABLE,connection);
+            dataBaseService.updateTask("1636643648818",TABLE,new Task("newTask3a","newDescr3a"),connection);
 
             List<Task> allTasks = dataBaseService.findAll(TABLE,connection);
             for (Task t:allTasks
